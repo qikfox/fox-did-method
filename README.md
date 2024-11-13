@@ -86,7 +86,7 @@ DID documents in the Fox method conform to the W3C DID Core Specification. By de
 ```
 
 ## 5. CRUD Operations
-Because Trustnet is a permissioned ledger therefore Create, Update, and Delete operations can only be performed by authorized entities. However, there are ledger gateway services that provide RESTful APIs for these operations that can be accessed by any entity. These ledger gateways use DIDComm v2 requests and require the entity to sign requests with the private key associated with the DID for authentication and authorization purposes.
+Because Trustnet is a permissioned ledger the Create, Update, and Delete operations can only be performed by authorized entities. However, there are ledger gateway services that provide RESTful APIs for these operations that can be accessed by any entity. These ledger gateways use DIDComm v2 requests and require the entity to sign requests with the private key associated with the DID for authentication and authorization purposes.
 
 ### 5.1 Create
 To create and register a did:fox DID:
