@@ -144,13 +144,22 @@ Handles can be purchased from authorized retailers online that are Trustnet endo
 The did:fox method is designed with the following security and privacy considerations:
 
 #### Permissioned Ledger:
-Trustnet is a permissioned ledger, ensuring that only trusted entities write to the ledger and participate in consensus.
+Trustnet is a permissioned ledger forked from Hyperledger Indy, ensuring that only trusted entities write to the ledger and participate in consensus.
 
 #### Data Minimization:
-Only essential information is stored on-chain, minimizing exposure of sensitive data.
+Only essential information is stored on-chain, minimizing exposure of sensitive data. No private information of the user is stored on-chain.
 
 #### Cryptographic Security:
 Utilizes strong cryptographic algorithms (Ed25519, BBS+, & X25519) to ensure the integrity and authenticity of DIDs and their associated documents.
+
+#### Secure Storage of Private Information
+When using the provided native wallet, all verifiable credentials and key information are encrypted and stored within an Aries Askar secure storage database, which is keyed with a user's password or PIN. Only users who have access to the physical device on which the wallet is installed and have the PIN or password will be able to decrypt and view the documents therein.
+
+#### Recovery
+At the end of initial wallet onboarding, users are provided with a 12-word mnemonic phrase that can be used to recover all identities possessed by that entity. Users are urged to keep this phrase in a safe physical location and not to share it with anyone.
+
+#### Key Generation & Key Rotations
+The wallet provided for Trustnet is a hierarchical deterministic wallet. All initial keys are generated automatically from the master key derived from the user's mnemonic. The wallet allows the users to rotate all keys for all their identities in case of suspected compromisation. 
 
 #### Privacy-Preserving:
 Entities control their DIDs and associated keys, enabling self-sovereign identity management.
