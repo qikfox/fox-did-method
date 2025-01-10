@@ -140,26 +140,34 @@ Universal Handles are a concept introduced in Trustnet and are an effective repl
 
 Handles can be purchased from authorized retailers online that are Trustnet endorsers. During the purchase process, the entity will generate a new DID to be associated with the handle and submit a `registerHandle` request to the issuer's ledger gateway service API. Please refer to the issuer service's documentation for the specific request format.
 
-## 7. Security and Privacy Considerations
-The did:fox method is designed with the following security and privacy considerations:
+## 7 Security Considerations
 
-#### Permissioned Ledger:
-Trustnet is a permissioned ledger forked from Hyperledger Indy, ensuring that only trusted entities write to the ledger and participate in consensus.
+**Permissioned Ledger**  
+Trustnet is a fork of Hyperledger Indy premissioned ledger (Sections 1, 5), ensuring only authorized entities can write to the ledger. This model reduces the risk of unauthorized additions or modifications of on-chain data.
 
-#### Data Minimization:
-Only essential information is stored on-chain, minimizing exposure of sensitive data. No private information of the user is stored on-chain.
+**Cryptographic Security**  
+The did:fox method uses secure algorithms such as Ed25519, BBS+, and X25519 (Sections 3, 4), maintaining the integrity and authenticity of DIDs and associated documents.
 
-#### Cryptographic Security:
-Utilizes strong cryptographic algorithms (Ed25519, BBS+, & X25519) to ensure the integrity and authenticity of DIDs and their associated documents.
+**Secure Storage of Private Information**  
+Private keys and verifiable credentials are encrypted and stored locally (e.g., in an Aries Askar database) keyed by the user’s PIN or password, ensuring only authorized individuals can access them.
 
-#### Secure Storage of Private Information
-When using the provided native wallet, all verifiable credentials and key information are encrypted and stored within an Aries Askar secure storage database, which is keyed with a user's password or PIN. Only users who have access to the physical device on which the wallet is installed and have the PIN or password will be able to decrypt and view the documents therein.
+**Recovery**  
+Users receive a 12-word mnemonic phrase after initial wallet onboarding. This phrase can restore all identities and should be kept in a secure, offline location.
 
-#### Recovery
-At the end of initial wallet onboarding, users are provided with a 12-word mnemonic phrase that can be used to recover all identities possessed by that entity. Users are urged to keep this phrase in a safe physical location and not to share it with anyone.
+**Key Generation & Key Rotations**  
+The hierarchical deterministic (HD) wallet automatically generates initial keys from the mnemonic. Keys can be rotated at any time if compromise is suspected, reducing potential security risks.
 
-#### Key Generation & Key Rotations
-The wallet provided for Trustnet is a hierarchical deterministic wallet. All initial keys are generated automatically from the master key derived from the user's mnemonic. The wallet allows the users to rotate all keys for all their identities in case of suspected compromisation. 
+## 8 Privacy Considerations
 
-#### Privacy-Preserving:
-Entities control their DIDs and associated keys, enabling self-sovereign identity management.
+**Data Minimization**  
+Only essential DID and public key information is stored on-chain (Sections 3, 5). The method-specific identifier is derived via a truncated hash of the public key, reducing exposure of sensitive details.
+
+**Privacy-Preserving Cryptography**  
+Support for BBS+ keys allows for selective disclosure of credential attributes (Section 4), helping users prove necessary information without revealing the entire credential.
+
+**Universal Handles**  
+Human-readable aliases (Section 6) act as a user-friendly layer over the underlying DID. They do not require storing personal data on-chain, further protecting privacy while simplifying discovery.
+
+**Local Storage & User Control**  
+Users hold encrypted keys and credentials on their own device, retaining full control over which information is shared. This self-sovereign approach ensures that no private data is ever exposed on the ledger.
+
